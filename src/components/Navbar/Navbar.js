@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 import logo from "../../images/logo.png";
 
 const Navbar = () => {
+  const { user, logOut } = useAuth();
   const [open, setOpen] = useState(false);
 
   const openMenu = () => {
@@ -30,20 +33,20 @@ const Navbar = () => {
             open ? "" : "hidden"
           }`}
         >
-          <a
-            href="#"
+          <Link
+            to="/"
             className="ml-0 mr-0 font-bold duration-100 md:ml-12 md:mr-4 lg:mr-10 transition-colors hover:text-[#C88776]"
             onClick={() => setOpen(false)}
           >
             Home
-          </a>
-          <a
-            href="#features"
+          </Link>
+          <Link
+            to="/courses"
             className="mr-0 font-bold duration-100 md:mr-3 lg:mr-8 transition-colors hover:text-[#C88776]"
             onClick={() => setOpen(false)}
           >
-            Features
-          </a>
+            Our Courses
+          </Link>
           <a
             href="#pricing"
             className="mr-0 font-bold duration-100 md:mr-3 lg:mr-8 transition-colors hover:text-[#C88776]"
@@ -59,13 +62,23 @@ const Navbar = () => {
             Testimonials
           </a>
           <div className="flex flex-col block w-full font-medium border-t border-gray-200 md:hidden">
-            <a
-              href="#_"
-              className="w-full py-2 whitespace-nowrap font-bold text-center text-pink-500"
-              onClick={() => setOpen(false)}
-            >
-              Sign-In
-            </a>
+            {user?.email ? (
+              <Link
+                to="/login"
+                className="w-full py-2 whitespace-nowrap font-bold text-center text-pink-500"
+                onClick={() => setOpen(false)}
+              >
+                Logout
+              </Link>
+            ) : (
+              <Link
+                to="/login"
+                className="w-full py-2 whitespace-nowrap font-bold text-center text-pink-500"
+                onClick={() => setOpen(false)}
+              >
+                Sign-Ins
+              </Link>
+            )}
             <a
               href="#_"
               className="relative inline-block w-full px-5 py-3 text-sm leading-none text-center text-white bg-indigo-700 fold-bold"
@@ -77,18 +90,19 @@ const Navbar = () => {
         </nav>
 
         <div className="absolute left-0 flex-col items-center justify-center hidden w-full pb-8 mt-48 border-b border-gray-200 md:relative md:w-auto md:bg-transparent md:border-none md:mt-0 md:flex-row md:p-0 md:items-end md:flex md:justify-between">
-          <a
-            href="#_"
-            className="relative z-40 whitespace-nowrap px-3 py-2 mr-0 text-sm font-bold text-slate-100 md:px-5 lg:text-white sm:mr-3 md:mt-0"
+          <Link
+            to="/login"
+            className="w-full mr-5 py-2 whitespace-nowrap font-bold text-center text-slate-50"
+            onClick={() => setOpen(false)}
           >
             Sign-In
-          </a>
-          <a
-            href="#_"
-            className="relative z-40 inline-block w-auto h-full px-5 py-3 text-sm font-bold leading-none text-white transition-all transition duration-100 duration-300 bg-indigo-700 rounded shadow-md fold-bold lg:bg-white lg:text-indigo-700 sm:w-full lg:shadow-none hover:shadow-xl hover:bg-[#C2F9FF]"
+          </Link>
+          <Link
+            to="/"
+            className="relative whitespace-nowrap z-40 inline-block w-auto h-full px-5 py-3 text-sm font-bold leading-none text-white transition-all transition duration-100 duration-300 bg-indigo-700 rounded shadow-md fold-bold lg:bg-white lg:text-indigo-700 sm:w-full lg:shadow-none hover:shadow-xl hover:bg-[#C2F9FF]"
           >
             Get Started
-          </a>
+          </Link>
         </div>
 
         <div

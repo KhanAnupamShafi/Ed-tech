@@ -17,6 +17,7 @@
 @layer base {
   html {
     margin: 0;
+    text-align: center;
     font-family: Merriweather,
     Exo,
     system-ui, sans-serif,
