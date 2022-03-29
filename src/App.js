@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import AuthProvider from "./context/AuthProvider";
 import Course from "./pages/Courses/Course";
 import Courses from "./pages/Courses/Courses";
@@ -13,7 +14,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/courses" element={<Courses />}>
+          <Route path="/courses" element={<PrivateRoute />}>
             <Route path=":courseId" element={<Course />} />
           </Route>
           <Route path="/login" element={<Login />} />
